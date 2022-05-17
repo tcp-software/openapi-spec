@@ -1,0 +1,86 @@
+openapi: '3.0.3' # we should move to 3.1.0
+info:
+    title: 'Humanity API'
+    description: ''
+    contact:
+        name: 'Humanity'
+        url: 'https://www.humanity.com'
+        email: 'support@humanity.com'
+    version: '2.0.0'
+servers:
+    - url: 'https://www.humanity.com'
+    - url: 'https://www.humanity.engineering'
+paths: {
+    "/api/v2/about/release": {
+        "get": {
+            "tags": [],
+            "summary": "",
+            "description": "",
+            "security": [
+                {
+                    "humanityOAuth2": [],
+                    "bearerAuth": []
+                }
+            ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/200"
+                },
+                "500": {
+                    "$ref": "#/components/responses/500"
+                }
+            }
+        }
+    }
+}
+components:
+    schemas: # An object to hold reusable Schema Objects. Referenced by: '#/components/schemas/...'
+        id:
+            type: integer
+            pattern: '[0-9]+'
+        uniqueId:
+            type: string
+            pattern: '[a-zA-Z0-9\-]+'
+        integrationId:
+            type: string
+            pattern: '[a-zA-Z0-9\-]+'
+    parameters: # An object to hold reusable Parameter Objects. Referenced by: '#/components/parameters/...'
+        company_id:
+            name: company_id
+            required: true
+            in: path
+            schema:
+              '$ref': '#/components/schemas/id'
+    requestBodies: {} # An object to hold reusable Request Body Objects. Referenced by: '#/components/requestBodies/...'
+    headers: {} # An object to hold reusable Header Objects. Referenced by: '#/components/headers/...'
+    responses:
+        '200':
+            description: 'OK'
+            headers: {}
+            content:
+              application/json: {}
+              application/xml: {}
+        '500':
+            description: 'Internal Server Error'
+            headers: {}
+            content:
+              application/json: {}
+              application/xml: {}
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+        humanityApiKey:
+            type: apiKey
+            name: key
+            in: query
+        humanityOAuth2:
+            type: oauth2
+            flows:
+                password:
+                    tokenUrl: '/oauth2/token'
+                    scopes: {}
+                authorizationCode:
+                    authorizationUrl: '/oauth2/authorize'
+                    tokenUrl: '/oauth2/token'
+                    scopes: {}
