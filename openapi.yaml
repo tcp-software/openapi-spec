@@ -1,4 +1,4 @@
-openapi: '3.0.3' # we should move to 3.1.0
+openapi: '3.0.3'
 info:
     title: 'Humanity API'
     description: ''
@@ -34,7 +34,7 @@ paths: {
     }
 }
 components:
-    schemas: # An object to hold reusable Schema Objects. Referenced by: '#/components/schemas/...'
+    schemas:
         id:
             type: integer
             pattern: '[0-9]+'
@@ -44,15 +44,15 @@ components:
         integrationId:
             type: string
             pattern: '[a-zA-Z0-9\-]+'
-    parameters: # An object to hold reusable Parameter Objects. Referenced by: '#/components/parameters/...'
+    parameters:
         company_id:
             name: company_id
             required: true
             in: path
             schema:
               '$ref': '#/components/schemas/id'
-    requestBodies: {} # An object to hold reusable Request Body Objects. Referenced by: '#/components/requestBodies/...'
-    headers: {} # An object to hold reusable Header Objects. Referenced by: '#/components/headers/...'
+    requestBodies: {}
+    headers: {}
     responses:
         '200':
             description: 'OK'
