@@ -10,49 +10,6 @@ info:
 servers:
     - url: 'https://www.humanity.com'
     - url: 'https://www.humanity.engineering'
-tags:
-    - name: admin
-    - name: autobuildshifts
-    - name: autoschedule
-    - name: availability
-    - name: availabilitybeta
-    - name: babylon
-    - name: billing
-    - name: breakrules
-    - name: breaks
-    - name: budget
-    - name: cloudelements
-    - name: company
-    - name: dashboard
-    - name: demand_driven_scheduling
-    - name: employees
-    - name: forecast
-    - name: group
-    - name: integrations
-    - name: leave
-    - name: location
-    - name: messaging
-    - name: mobile
-    - name: payroll
-    - name: position
-    - name: reports
-    - name: reports-v2
-    - name: sales
-    - name: schedule
-    - name: schedule_rule_builder
-    - name: schedulebeta
-    - name: shifts
-    - name: staff
-    - name: tags
-    - name: tcp
-    - name: terminal
-    - name: timeclock
-    - name: trade
-    - name: training
-    - name: training-v2
-    - name: utility
-    - name: workday
-    - name: workunit
 paths: {
     "/api/v2/about/release": {
         "get": {
