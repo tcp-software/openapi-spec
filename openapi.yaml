@@ -31,6 +31,29 @@ paths: {
                 }
             }
         }
+    },
+    "/api/v2/billing/catalog": {
+        "get": {
+            "tags": [
+                "billing"
+            ],
+            "summary": "",
+            "description": "",
+            "security": [
+                {
+                    "humanityOAuth2": [],
+                    "bearerAuth": []
+                }
+            ],
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/200"
+                },
+                "500": {
+                    "$ref": "#/components/responses/500"
+                }
+            }
+        }
     }
 }
 components:
