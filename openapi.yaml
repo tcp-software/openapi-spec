@@ -16,8 +16,8 @@ paths:
     get:
       tags:
         - Integrations
-      summary: 'Get API release version',
-      description: 'Get API release version',
+      summary: 'Get API release version'
+      description: 'Get API release version'
       responses:
         '200':
           $ref: '#/components/responses/200'
