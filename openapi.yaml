@@ -48,7 +48,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 oneOf:
                   - { $ref: '#/components/schemas/ResponseObject' }
                   - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
@@ -84,7 +83,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 oneOf:
                   - { $ref: '#/components/schemas/ResponseObject' }
                   - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
@@ -113,31 +111,19 @@ paths:
       parameters:
         -
           $ref: '#/components/parameters/vendorType'
-        -
-          name: integrationId
-          in: query
-          description: 'Employee id'
-          required: true
-          schema:
-            type: string
-            maxLength: 512
-            minLength: 1
-        -
-          name: first_name
-          in: query
-          description: 'Employee first name'
-          required: true
-          schema:
-            type: string
-            maxLength: 50
-            minLength: 1
+      requestBody:
+        description: 'employee create/update payload'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employeeObject'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: object
                 oneOf:
                   - { $ref: '#/components/schemas/ResponseObject' }
                   - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
@@ -184,7 +170,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 oneOf:
                   - { $ref: '#/components/schemas/ResponseObject' }
                   - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
@@ -216,15 +201,17 @@ paths:
       parameters:
         -
           $ref: '#/components/parameters/vendorType'
-        -
-          name: employees
-          in: query
-          description: 'An array of employees to create/update'
-          required: true
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/employeeObject'
+      requestBody:
+        description: 'bulk employee create/update payload'
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                employees:
+                  type: array
+                  items: { $ref: '#/components/schemas/bulkEmployeeObject' }
+              type: object
       responses:
         '202':
           description: Accepted
@@ -264,7 +251,6 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 oneOf:
                   - { $ref: '#/components/schemas/ResponseObject' }
                   - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
@@ -308,7 +294,6 @@ components:
           type: integer
           nullable: false
         data:
-          type: object
           oneOf:
             -
               type: object
@@ -368,16 +353,455 @@ components:
           minItems: 1
       type: object
     employeeObject:
+      required:
+        - integration_id
+        - first_name
       properties:
         integration_id:
           type: string
           maxLength: 512
           minLength: 1
+          example: ac1046dee5cd1fb2cf8a1a0b634142
+          nullable: false
+        eid:
+          type: string
+          example: P5216
+        status:
+          type: integer
+          enum:
+            - 0
+            - 1
+            - -1
+            - -2
+        group:
+          type: integer
+          enum:
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+        name:
+          type: string
+          minLength: 1
+          example: 'Paul Jones'
           nullable: false
         first_name:
           type: string
           minLength: 1
+          example: Paul
           nullable: false
+        middle_name:
+          type: string
+          minLength: 1
+          example: Smith
+        last_name:
+          type: string
+          minLength: 1
+          example: Jones
+        nick_name:
+          type: string
+          minLength: 1
+          example: PJ
+        email:
+          type: string
+          maxLength: 80
+          minLength: 1
+          example: paul.jones@my-company.com
+        birth_day:
+          type: integer
+          example: 1
+        birth_month:
+          type: integer
+          example: 12
+        birth_year:
+          type: string
+          example: 1975
+        cell_phone:
+          type: string
+          example: 123-456-789
+        wage:
+          type: integer
+          example: 50
+        p_email:
+          type: integer
+          enum:
+            - 0
+            - 1
+        home_phone:
+          type: string
+          example: 1-987-654-3210
+        address:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: '5124 Hadfield St'
+        city:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: Philadelphia
+        state:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: Pennsylvania
+        job_title:
+          type: string
+          maxLength: 255
+          minLength: 1
+          example: CEO
+        gender:
+          type: string
+          enum:
+            - M
+            - F
+          example: M
+        zip:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: '19143'
+        notes:
+          type: string
+          example: 'some note'
+        password:
+          type: string
+          minLength: 8
+          example: 'secret password'
+        username:
+          type: string
+          minLength: 3
+          example: my_username
+        addschedule:
+          type: string
+        removeschedule:
+          type: string
+        addskill:
+          type: integer
+        removeskill:
+          type: integer
+        send_activation:
+          type: integer
+          enum:
+            - 1
+          example: 1
+        language:
+          type: string
+          example: en_US
+        timezone_id:
+          type: integer
+          example: 153
+        undertime:
+          type: integer
+          maximum: 60
+          minimum: 0
+          example: 30
+        overtime:
+          type: integer
+          maximum: 80
+          minimum: -2
+          example: 16
+        daily_overtime:
+          type: integer
+          maximum: 24
+          minimum: 0
+          example: 2
+        max_days_row:
+          type: integer
+          maximum: 30
+          minimum: -1
+          example: 5
+        pref_shift_autoconfirm:
+          type: integer
+          enum:
+            - -2
+            - -1
+            - 1
+          example: 1
+        location:
+          type: integer
+        monthly_overtime:
+          type: integer
+          maximum: 250
+          minimum: -2
+          example: 30
+        monthly_undertime:
+          type: integer
+          maximum: 250
+          minimum: 0
+          example: 60
+        pref_mtimebshifts:
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 12
+            - 16
+            - 20
+            - 24
+            - 28
+            - 32
+            - 36
+            - 40
+            - 44
+            - 48
+          example: 12
+        work_start_date:
+          type: string
+          format: 'Y-m-d H:i:s'
+          example: '2022-05-20 07:30:00'
+        settings:
+          type: string
+        primary_skill:
+          type: integer
+        unique_id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          example: teST-01234sog
+        employee_type:
+          description: '0: None, 1: Full time, 2: Part time, 3: Seasonal, 4: Temporary, 5: Contractor, 6: Volunteer'
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+          example: 1
+        pay_type:
+          description: '0: None, 1: Hourly, 2: Salary, 3: Commission, 4: Exception Hourly, 5: Daily, 6: Weekly, 7: Monthly, 8: Piece Rate, 9: Contract, 10: Pro Rata'
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+          example: 2
+        confirm_user:
+          type: string
+      type: object
+    bulkEmployeeObject:
+      required:
+        - integration_id
+        - first_name
+      properties:
+        integration_id:
+          type: string
+          maxLength: 512
+          minLength: 1
+          example: ac1046dee5cd1fb2cf8a1a0b634142
+          nullable: false
+        first_name:
+          type: string
+          minLength: 1
+          example: Paul
+          nullable: false
+        eid:
+          type: string
+          example: P5216
+        status:
+          type: integer
+          enum:
+            - 0
+            - 1
+            - -1
+            - -2
+        group:
+          type: integer
+          enum:
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+        name:
+          type: string
+          minLength: 1
+          example: 'Paul Jones'
+          nullable: false
+        middle_name:
+          type: string
+          minLength: 1
+          example: Smith
+        last_name:
+          type: string
+          minLength: 1
+          example: Jones
+        nick_name:
+          type: string
+          minLength: 1
+          example: PJ
+        birth_day:
+          type: integer
+          maximum: 31
+          minimum: 1
+          example: 1
+        birth_month:
+          type: integer
+          maximum: 12
+          minimum: 1
+          example: 12
+        birth_year:
+          type: string
+          example: 1975
+        cell_phone:
+          type: string
+          example: 123-456-789
+        p_email:
+          type: integer
+          enum:
+            - 0
+            - 1
+        home_phone:
+          type: string
+          example: 1-987-654-3210
+        address:
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: '5124 Hadfield St'
+        city:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: Philadelphia
+        state:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: Pennsylvania
+        job_title:
+          type: string
+          maxLength: 255
+          minLength: 1
+          example: CEO
+        zip:
+          type: string
+          maxLength: 50
+          minLength: 1
+          example: '19143'
+        notes:
+          type: string
+          example: 'some note'
+        username:
+          type: string
+          minLength: 3
+          example: my_username
+        send_activation:
+          type: integer
+          enum:
+            - 1
+          example: 1
+        undertime:
+          type: integer
+          maximum: 60
+          minimum: 0
+          example: 30
+        overtime:
+          type: integer
+          maximum: 80
+          minimum: -2
+          example: 16
+        daily_overtime:
+          type: integer
+          maximum: 24
+          minimum: 0
+          example: 2
+        max_days_row:
+          type: integer
+          maximum: 30
+          minimum: -1
+          example: 5
+        pref_shift_autoconfirm:
+          type: integer
+          enum:
+            - -2
+            - -1
+            - 1
+          example: 1
+        monthly_overtime:
+          type: integer
+          maximum: 250
+          minimum: -2
+          example: 30
+        monthly_undertime:
+          type: integer
+          maximum: 250
+          minimum: 0
+          example: 60
+        pref_mtimebshifts:
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 12
+            - 16
+            - 20
+            - 24
+            - 28
+            - 32
+            - 36
+            - 40
+            - 44
+            - 48
+          example: 12
+        employee_type:
+          description: '0: None, 1: Full time, 2: Part time, 3: Seasonal, 4: Temporary, 5: Contractor, 6: Volunteer'
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+          example: 1
+        pay_type:
+          description: '0: None, 1: Hourly, 2: Salary, 3: Commission, 4: Exception Hourly, 5: Daily, 6: Weekly, 7: Monthly, 8: Piece Rate, 9: Contract, 10: Pro Rata'
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+          example: 2
+        confirm_user:
+          type: string
       type: object
   responses:
     '400':
