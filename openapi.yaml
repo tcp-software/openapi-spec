@@ -304,13 +304,13 @@ components:
         data:
           oneOf:
             -
-              type: object
+              $ref: '#/components/schemas/bulkEmployeeObject'
             -
               type: string
             -
               type: array
               items:
-                type: object
+                $ref: '#/components/schemas/bulkEmployeeObject'
         metadata:
           type: array
           items:
