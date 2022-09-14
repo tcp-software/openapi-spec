@@ -226,7 +226,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseObject'
+                properties:
+                  status: { type: integer }
+                  data: { properties: { jobId: { type: string } }, type: object }
+                  metadata: { type: object }
+                  errors: { type: object }
+                  token: { type: string }
+                type: object
               examples:
                 accepted:
                   summary: 'accepted response'
@@ -234,7 +240,18 @@ paths:
         '500':
           $ref: '#/components/responses/500'
         '400':
-          $ref: '#/components/responses/400'
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: integer }
+                  errors: { properties: { id: { type: string }, status: { type: integer }, state: { type: string }, title: { type: string }, detail: { type: string }, source: { type: object } }, type: object }
+                type: object
+              examples:
+                'Bad Request':
+                  summary: 'Bad Request'
+                  value: { status: 89, errors: { id: 01gap45sjc1gk77t19xcyq0ymq, status: 400, state: BAD_REQUEST, title: '', detail: 'Field ''employees[0].integration_id'' has error: ''The property integration_id is required''', source: [] } }
         '401':
           $ref: '#/components/responses/401'
   /api/v2/integration-api/bulk/employees_status:
@@ -259,20 +276,35 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                  - { $ref: '#/components/schemas/ResponseObject' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
+                properties:
+                  status: { type: integer }
+                  data: { properties: { logId: { type: string }, jobId: { type: string }, integrationId: { type: string }, startedAt: { type: string }, finishedAt: { type: string }, status: { type: string, enum: [PENDING, PROCESSING, FAILED, FINISHED, CANCELED] }, numberOfRetries: { type: string }, vendorId: { type: integer }, vendorName: { type: string }, companyId: { type: integer }, companyName: { type: string }, syncType: { type: string }, parentSyncId: { type: string }, SyncDirection: { type: string } }, type: object }
+                  metadata: { type: object }
+                  errors: { type: object }
+                  token: { type: string }
+                type: object
               examples:
                 success:
                   summary: 'success response'
-                  value: { status: 1, data: { logId: ceeb07fb-b461-4b29-bdeb-2f9355eda48b, jobId: b10e1838-eb78-45e1-888a-047e5a652d56, integrationId: 3fa85f64-5717-4562-b3fc-2c963f66afa6, startedAt: null, finishedAt: null, status: string, numberOfRetries: 0, vendorId: 0, vendorName: null, companyId: 11, companyName: null, syncType: null, parentSyncId: null, SyncDirection: null }, metadata: [], errors: null, token: b1e43398e00b11ec9d640242ac120002aaf78e14 }
+                  value: { status: 1, data: { logId: ceeb07fb-b461-4b29-bdeb-2f9355eda48b, jobId: b10e1838-eb78-45e1-888a-047e5a652d56, integrationId: 3fa85f64-5717-4562-b3fc-2c963f66afa6, startedAt: null, finishedAt: null, status: PROCESSING, numberOfRetries: 0, vendorId: 0, vendorName: null, companyId: 11, companyName: null, syncType: null, parentSyncId: null, SyncDirection: null }, metadata: [], errors: null, token: b1e43398e00b11ec9d640242ac120002aaf78e14 }
                 error:
                   summary: 'error response'
                   value: { status: 89, errors: [{ id: 01g4wkhtwcgfnd42w0dzwjy878, status: 400, state: BAD_REQUEST, title: '', detail: 'Invalid jobId provided: b10e1838-eb78-45e1-888a-047e5a652d56', source: [] }] }
         '500':
           $ref: '#/components/responses/500'
         '400':
-          $ref: '#/components/responses/400'
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: integer }
+                  errors: { properties: { id: { type: string }, status: { type: integer }, state: { type: string }, title: { type: string }, detail: { type: string }, source: { type: object } }, type: object }
+                type: object
+              examples:
+                'Bad Request':
+                  summary: 'Bad Request'
+                  value: { status: 89, errors: { id: 01gap45sjc1gk77t19xcyq0ymq, status: 400, state: BAD_REQUEST, title: '', detail: 'Job id is not valid uuid. Provided: lkajdklasd''', source: [] } }
         '401':
           $ref: '#/components/responses/401'
 components:
@@ -288,7 +320,13 @@ components:
       type: object
     responseError401:
       properties:
-        errors:
+        status:
+          type: integer
+        data:
+          type: string
+        error:
+          type: string
+        token:
           type: string
       type: object
     responseError500:
