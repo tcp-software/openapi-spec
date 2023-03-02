@@ -2273,14 +2273,19 @@ components:
               integrations:
                 type: object
                 properties:
-                  company_id:
-                    type: integer
-                  integration_type:
-                    type: integer
-                  integration_id:
-                    type: string
-                  extra:
-                    type: string
+                  Workato:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        company_id:
+                          type: integer
+                        integration_type:
+                          type: integer
+                        integration_id:
+                          type: string
+                        extra:
+                          type: string
         metadata:
           type: array
           items:
