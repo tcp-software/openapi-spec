@@ -2230,34 +2230,32 @@ components:
           type: integer
           nullable: false
         data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              parent:
-                type: string
-              is_parent:
-                type: integer
-              integrations:
-                type: object
-                properties:
-                  Workato:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        company_id:
-                          type: integer
-                        integration_type:
-                          type: integer
-                        integration_id:
-                          type: string
-                        extra:
-                          type: string
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            parent:
+              type: string
+            is_parent:
+              type: integer
+            integrations:
+              type: object
+              properties:
+                Workato:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      company_id:
+                        type: integer
+                      integration_type:
+                        type: integer
+                      integration_id:
+                        type: string
+                      extra:
+                        type: string
         metadata:
           type: array
           items:
@@ -2275,34 +2273,32 @@ components:
           type: integer
           nullable: false
         data:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              name:
-                type: string
-              parent:
-                type: string
-              is_parent:
-                type: integer
-              integrations:
-                type: object
-                properties:
-                  Workato:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        company_id:
-                          type: integer
-                        integration_type:
-                          type: integer
-                        integration_id:
-                          type: string
-                        extra:
-                          type: string
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            parent:
+              type: string
+            is_parent:
+              type: integer
+            integrations:
+              type: object
+              properties:
+                Workato:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      company_id:
+                        type: integer
+                      integration_type:
+                        type: integer
+                      integration_id:
+                        type: string
+                      extra:
+                        type: string
         metadata:
           type: array
           items:
