@@ -56,11 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                  - { $ref: '#/components/schemas/ResponseCompanyObject' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithoutError' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithoutMetadata' }
+                $ref: '#/components/schemas/ResponseCompanyObject'
               examples:
                 success:
                   summary: 'success response'
@@ -132,11 +128,7 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                  - { $ref: '#/components/schemas/ResponseCompanyObject' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithoutError' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithoutMetadata' }
+                $ref: '#/components/schemas/ResponseCompanyObject'
               examples:
                 'update success':
                   summary: 'update success response'
