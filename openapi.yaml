@@ -1717,6 +1717,8 @@ paths:
       parameters:
         -
           $ref: '#/components/parameters/vendorType'
+        -
+          $ref: '#/components/parameters/childCompanyId'
       responses:
         '200':
           description: OK
@@ -3515,6 +3517,14 @@ components:
               value:
                 error: 'An error occurred!'
   parameters:
+    childCompanyId:
+      name: child_company_id
+      in: query
+      description: 'Child Company Id'
+      required: false
+      schema:
+        type: integer
+        format: base64
     integrationId:
       name: integrationId
       in: path
