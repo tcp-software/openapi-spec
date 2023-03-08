@@ -2859,6 +2859,10 @@ components:
           maxLength: 64
           minLength: 1
           example: 100PK
+        child_company_id:
+          type: integer
+          format: base64
+          example: 11
       type: object
     bulkLocationObject:
       required:
