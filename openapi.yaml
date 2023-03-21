@@ -2359,6 +2359,10 @@ components:
           minLength: 1
           example: ac1046dee5cd1fb2cf8a1a0b634142
           nullable: false
+        child_company_id:
+          type: integer
+          format: base64
+          example: 11
         eid:
           type: string
           example: P5216
