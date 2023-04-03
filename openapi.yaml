@@ -559,6 +559,8 @@ paths:
           $ref: '#/components/parameters/employeeIntegrationId'
         -
           $ref: '#/components/parameters/positionIntegrationId'
+        -
+          $ref: '#/components/parameters/childCompanyId'
       responses:
         '200':
           description: OK
@@ -596,6 +598,8 @@ paths:
           $ref: '#/components/parameters/employeeIntegrationId'
         -
           $ref: '#/components/parameters/positionIntegrationId'
+        -
+          $ref: '#/components/parameters/childCompanyId'
       requestBody:
         description: 'employee create/update payload'
         required: true
@@ -649,6 +653,8 @@ paths:
           $ref: '#/components/parameters/employeeIntegrationId'
         -
           $ref: '#/components/parameters/positionIntegrationId'
+        -
+          $ref: '#/components/parameters/childCompanyId'
       responses:
         '200':
           description: OK
