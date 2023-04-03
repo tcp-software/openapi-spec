@@ -598,8 +598,6 @@ paths:
           $ref: '#/components/parameters/employeeIntegrationId'
         -
           $ref: '#/components/parameters/positionIntegrationId'
-        -
-          $ref: '#/components/parameters/childCompanyId'
       requestBody:
         description: 'employee create/update payload'
         required: true
@@ -655,6 +653,17 @@ paths:
           $ref: '#/components/parameters/positionIntegrationId'
         -
           $ref: '#/components/parameters/childCompanyId'
+      requestBody:
+        description: 'employee create/update payload'
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                child_company_id:
+                  type: integer
+                  format: base64
+                  example: 11
       responses:
         '200':
           description: OK
@@ -2960,6 +2969,10 @@ components:
           minLength: 1
           example: ac1046dee5cd1fb2cf8a1a0b634142
           nullable: false
+        child_company_id:
+          type: integer
+          format: base64
+          example: 11
         active:
           type: integer
           enum:
@@ -3112,6 +3125,10 @@ components:
           minLength: 1
           example: ac1046dee5cd1fb2cf8a1a0b634142
           nullable: false
+        child_company_id:
+          type: integer
+          format: base64
+          example: 11
         wage:
           type: string
           example: '10'
