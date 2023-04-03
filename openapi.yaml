@@ -1931,17 +1931,15 @@ paths:
       parameters:
         -
           $ref: '#/components/parameters/vendorType'
+        -
+          $ref: '#/components/parameters/childCompanyId'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                oneOf:
-                  - { $ref: '#/components/schemas/ResponsePositionObject' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithErrors' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithoutError' }
-                  - { $ref: '#/components/schemas/ResponseObjectWithoutMetadata' }
+                $ref: '#/components/schemas/ResponsePositionObject'
               examples:
                 success:
                   summary: 'success response'
@@ -3072,6 +3070,22 @@ components:
           maxLength: 64
           minLength: 1
           example: test1234
+        integrations:
+          type: object
+          properties:
+            Workato:
+              type: array
+              items:
+                type: object
+                properties:
+                  company_id:
+                    type: integer
+                  integration_type:
+                    type: integer
+                  integration_id:
+                    type: string
+                  extra:
+                    type: string
       type: object
     employeePositionObject:
       required:
