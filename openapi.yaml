@@ -685,6 +685,8 @@ paths:
           $ref: '#/components/parameters/vendorType'
         -
           $ref: '#/components/parameters/employeeIntegrationId'
+        -
+          $ref: '#/components/parameters/childCompanyId'
       responses:
         '200':
           description: OK
