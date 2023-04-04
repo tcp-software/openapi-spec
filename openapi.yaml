@@ -3006,6 +3006,11 @@ components:
           type: integer
           minLength: 1
           example: 549620
+        location_integration_id:
+          type: string
+          maxLength: 512
+          minLength: 1
+          example: ac1046dee5cd1fb2cf8a1a0b634142
         color:
           type: integer
           minLength: 1
