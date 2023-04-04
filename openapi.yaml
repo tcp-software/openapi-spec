@@ -651,8 +651,6 @@ paths:
           $ref: '#/components/parameters/employeeIntegrationId'
         -
           $ref: '#/components/parameters/positionIntegrationId'
-        -
-          $ref: '#/components/parameters/childCompanyId'
       requestBody:
         description: 'employee create/update payload'
         required: true
